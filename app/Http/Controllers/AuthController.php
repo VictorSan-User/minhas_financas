@@ -38,7 +38,9 @@ class AuthController extends Controller
             if(!$buscaUsuario || !password_verify($request->password, $buscaUsuario->password)) {
                 return redirect()->back()->withErrors('Email ou senha inválidos.')->withInput();
             }
+
             // redirecionar para a dashboard
+            $request->session()->put('user', $buscaUsuario);
             return redirect()->route('user.dashboard');
 
         }catch (ValidationException $e) {
@@ -83,6 +85,13 @@ class AuthController extends Controller
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
+    }
+
+    public function logout() {
+        session_unset();
+        session_destroy();
+
+        return redirect()->route('home');
     }
 
 }
