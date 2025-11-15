@@ -4,7 +4,7 @@
         <div class="row text-white fs-1 pt-5">
             <div class="col-6 text-start"><strong>Minhas Finanças</strong></div>
             <div class="col-6">
-                <button class="btn btn-sm bg-primary d-block mx-auto"><a href="#" class="text-decoration-none"><div class="col-3 text-end text-white fs-3">Login</div></a></button>
+                <button class="btn btn-sm bg-primary d-block mx-auto"><a href="{{ route('login') }}" class="text-decoration-none"><div class="col-3 text-end text-white fs-3">Login</div></a></button>
             </div>
         </div>
         <div class="row">
