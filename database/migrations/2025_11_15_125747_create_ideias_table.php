@@ -17,6 +17,9 @@ return new class extends Migration
             $table->text('description');
             $table->enum('categoria', ['Profissional', 'Pessoal']);
             $table->timestamps();
+            $table->foreignId('user_id')
+                    ->constrained()
+                    ->onDelete('cascade');
         });
     }
 

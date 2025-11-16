@@ -10,5 +10,8 @@ class Meta extends Model
         'title',
         'description',
         'categoria',
+        'data_inicio',
+        'data_fim',
+        'user_id'
     ];
 }

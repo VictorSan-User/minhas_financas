@@ -41,6 +41,8 @@ class AuthController extends Controller
 
             // redirecionar para a dashboard
             $request->session()->put('user', $buscaUsuario);
+            $request->session()->put('user_id', $buscaUsuario->id);
+            // dd($request->session()->all());
             return redirect()->route('user.dashboard');
 
         }catch (ValidationException $e) {

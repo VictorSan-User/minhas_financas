@@ -5,22 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
 class EventController extends Controller
 {
-    public function index() :View{
-        //seria o extrato da conta
-        $movimentacoes = Event::all();
-
-        return view('verified.events_index', ['movimentacoes' => $movimentacoes]);
-    }
-
     public function create() :View {
         return view('verified.create_event');
     }
 
     public function store(Request $request) {
+        $user_id = session('user_id');
         $validatedData = $request->validate([
             'title' => 'required|min:3',
             'description' => 'required',
@@ -33,6 +28,7 @@ class EventController extends Controller
             'event_date.required' => 'A data é obrigatória',
             'value.required' => 'O valor do evento é obrigatório'
         ]);
+        $validatedData['user_id'] = $user_id;
         $new_event = Event::create($validatedData);
 
         if($new_event){

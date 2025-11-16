@@ -18,6 +18,9 @@ return new class extends Migration
             $table->dateTime("event_date");
             $table->float("value");
             $table->timestamps();
+            $table->foreignId('user_id')
+                    ->constrained()
+                    ->onDelete('cascade');
         });
     }
 

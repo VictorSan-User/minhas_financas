@@ -10,6 +10,7 @@ class Ideia extends Model
         'title',
         'description',
         'categoria',
+        'user_id'
     ];
 
 }

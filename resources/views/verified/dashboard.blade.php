@@ -1,6 +1,16 @@
 <?php
 $user = session('user');
-// O código abaixo assume que a função session() está definida e funcionando corretamente.
+
+use App\Models\User;
+use App\Models\Event;
+use App\Models\Meta;
+use App\Models\Ideia;
+
+$user_id = session('user_id');
+$eventos = Event::where('user_id', $user_id)->get();
+$metas = Meta::where('user_id', $user_id)->get();
+$ideias = Ideia::where('user_id', $user_id)->get();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -82,16 +92,106 @@ $user = session('user');
             </div>
 
             <div id="content-anuncios" class="content-section hidden">
-                <h1 class="text-3xl font-bold text-gray-800 mb-6">Seu Extrato</h1>
-                <div class="flex bg-white rounded-lg shadow-md" style="height: 70vh;">
+                <div class="row">
+                    <div class="col-4">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-6">Meu Extrato</h1>
+                    </div>
+                    <div class="col-4">
+                        {{-- abc --}}
+                    </div>
+                    <div class="col-4 justify-content-end">
+                        <button class="btn btn-primary"><a href="{{ route('events.create') }}" class="text-decoration-none">Criar Registro</a></button>
+                    </div>
+                </div>
+                <div class="container-fluid bg-white rounded-lg shadow-md" style="height: 70vh;">
+                    <div class="row py-2">
+                        <div class="col-4">
+                            <h4><strong>Título</strong></h4>
+                        </div>
 
+                        <div class="col-4">
+                            <h4><strong>Descrição</strong></h4>
+                        </div>
+
+                        <div class="col-2 text-right">
+                            <h4><strong>Valor</strong></h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <?php foreach ($eventos as $evento): ?>
+                        <div class="row border-bottom py-2">
+                            <div class="col-3">
+                                {{ $evento->title }}
+                            </div>
+                            <div class="col-3">
+                                {{ $evento->description }}
+                            </div>
+                            <div class="col-4 text-right">
+                                <div class="text-success">
+                                    <strong>R$ {{ number_format($evento->value, 2, ',', '.') }}</strong>
+                                </div>
+                                <div class="text-secondary">
+                                    {{$evento->event_date}}
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <a href="#" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="#" class="btn btn-sm btn-danger">Excluir</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
 
             <div id="content-metas" class="content-section hidden">
-                <h1 class="text-3xl font-bold text-gray-800 mb-6">Minhas Metas</h1>
-                <div class="flex bg-white rounded-lg shadow-md" style="height: 70vh;">
+                <div class="row">
+                    <div class="col-4">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-6">Minhas Metas</h1>
+                    </div>
+                    <div class="col-4">
+                        {{-- abc --}}
+                    </div>
+                    <div class="col-4 justify-content-end">
+                        <button class="btn btn-primary"><a href="{{ route('meta.create') }}" class="text-decoration-none">Criar Nova Meta</a></button>
+                    </div>
+                </div>
+                <div class="container-fluid bg-white rounded-lg shadow-md" style="height: 70vh;">
+                    <div class="row py-2">
+                        <div class="col-4">
+                            <h4><strong>Título</strong></h4>
+                        </div>
 
+                        <div class="col-4">
+                            <h4><strong>Descrição da meta</strong></h4>
+                        </div>
+
+                        <div class="col-2 text-right">
+                            <h4><strong>Valor da Meta</strong></h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <?php foreach ($metas as $meta): ?>
+                        <div class="row border-bottom py-2">
+                            <div class="col-3">
+                                {{ $meta->title }}
+                            </div>
+                            <div class="col-3">
+                                {{ $meta->description }}
+                            </div>
+                            <div class="col-4 text-right">
+                                <div class="text-success">
+                                    <strong>R$ {{ number_format($meta->value, 2, ',', '.') }}</strong>
+                                </div>
+                                <div class="text-secondary">
+                                    {{$meta->event_date}}
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <a href="#" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="#" class="btn btn-sm btn-success">Concluida</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
 
