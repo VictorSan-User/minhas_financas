@@ -45,19 +45,20 @@
 
     <div class="card-dark shadow text-dark">
         <div class="card-body">
-            <h2 class="text-center mb-4" style="color: #0d6efd;">Criar Nova Meta</h2>
+            <h2 class="text-center mb-4" style="color: #0d6efd;">Editar a Meta {{ $meta->id }}</h2>
             <p class="text-center text-secondary mb-4">Insira os detalhes para sua nova meta financeira.</p>
 
-            <form action="{{ route('meta.store') }}" method="POST">
+            <form action="{{ route('meta.update', $meta) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <label for="title" class="form-label text-primary"><strong>Título</strong></label>
-                    <input type="text" class="form-control form-control-lg form-control" id="title" name="title" placeholder="Quitar meu cartão de crédito">
+                    <input type="text" class="form-control form-control-lg form-control" id="title" name="title" placeholder="{{$meta->title}}">
                 </div>
 
                 <div class="mb-3">
                     <label for="description" class="form-label text-primary"><strong>Descrição da meta</strong></label>
-                    <textarea class="form-control form-control-lg form-control" id="description" name="description" rows="3" placeholder="Detalhes sobre a meta..."></textarea>
+                    <textarea class="form-control form-control-lg form-control" id="description" name="description" rows="3">{{ $meta->description }}</textarea>
                 </div>
 
                 <div class="mb-3">
@@ -72,12 +73,12 @@
 
                 <div class="mb-4">
                     <label for="value" class="form-label text-primary"><strong>Valor da Meta R$</strong></label>
-                    <input type="decimal" step="0.01" min="0" class="form-control form-control-lg form-control" id="valor" name="valor" placeholder="0,00">
+                    <input type="decimal" step="0.01" min="0" class="form-control form-control-lg form-control" id="valor" name="valor" placeholder="{{ $meta->valor }}">
                 </div>
 
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary btn-lg">
-                        CRIAR META!
+                        FINALIZAR!
                     </button>
                 </div>
                 <div class="d-grid">

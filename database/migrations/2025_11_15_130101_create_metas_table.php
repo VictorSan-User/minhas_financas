@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->enum('categoria', ['Profissional', 'Pessoal']);
+            $table->float('valor');
             $table->timestamps();
             $table->date('data_inicio');
             $table->date('data_fim');

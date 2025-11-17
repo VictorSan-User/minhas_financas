@@ -9,9 +9,9 @@ class Meta extends Model
     protected $fillable = [
         'title',
         'description',
-        'categoria',
         'data_inicio',
         'data_fim',
+        'valor',
         'user_id'
     ];
 }

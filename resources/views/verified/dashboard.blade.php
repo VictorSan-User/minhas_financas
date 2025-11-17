@@ -105,28 +105,34 @@ $ideias = Ideia::where('user_id', $user_id)->get();
                 </div>
                 <div class="container-fluid bg-white rounded-lg shadow-md" style="height: 70vh;">
                     <div class="row py-2">
-                        <div class="col-4">
+                        <div class="col-1">
+                            <h4><strong>ID</strong></h4>
+                        </div>
+                        <div class="col-3">
                             <h4><strong>Título</strong></h4>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-3">
                             <h4><strong>Descrição</strong></h4>
                         </div>
 
-                        <div class="col-2 text-right">
+                        <div class="col-2 text-center">
                             <h4><strong>Valor</strong></h4>
                         </div>
                     </div>
                     <hr>
                     <?php foreach ($eventos as $evento): ?>
                         <div class="row border-bottom py-2">
+                            <div class="col-1">
+                                {{$evento->id}}
+                            </div>
                             <div class="col-3">
                                 {{ $evento->title }}
                             </div>
                             <div class="col-3">
                                 {{ $evento->description }}
                             </div>
-                            <div class="col-4 text-right">
+                            <div class="col-3 text-right">
                                 <div class="text-success">
                                     <strong>R$ {{ number_format($evento->value, 2, ',', '.') }}</strong>
                                 </div>
@@ -135,8 +141,8 @@ $ideias = Ideia::where('user_id', $user_id)->get();
                                 </div>
                             </div>
                             <div class="col-2 text-center">
-                                <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                                <a href="#" class="btn btn-sm btn-danger">Excluir</a>
+                                <a href="{{ route('events.edit', $evento->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="{{ route('events.destroy_confirm', $evento->id) }}" class="btn btn-sm btn-danger">Excluir</a>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -157,11 +163,14 @@ $ideias = Ideia::where('user_id', $user_id)->get();
                 </div>
                 <div class="container-fluid bg-white rounded-lg shadow-md" style="height: 70vh;">
                     <div class="row py-2">
-                        <div class="col-4">
+                        <div class="col-1">
+                            <h4><strong>ID</strong></h4>
+                        </div>
+                        <div class="col-3">
                             <h4><strong>Título</strong></h4>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-4 text-left">
                             <h4><strong>Descrição da meta</strong></h4>
                         </div>
 
@@ -172,23 +181,26 @@ $ideias = Ideia::where('user_id', $user_id)->get();
                     <hr>
                     <?php foreach ($metas as $meta): ?>
                         <div class="row border-bottom py-2">
-                            <div class="col-3">
+                            <div class="col-1">
+                                {{ $meta->id }}
+                            </div>
+                            <div class="col-2">
                                 {{ $meta->title }}
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 {{ $meta->description }}
                             </div>
-                            <div class="col-4 text-right">
+                            <div class="col-3 text-right">
                                 <div class="text-success">
-                                    <strong>R$ {{ number_format($meta->value, 2, ',', '.') }}</strong>
+                                    <strong>R$ {{ number_format($meta->valor, 2, ',', '.') }}</strong>
                                 </div>
                                 <div class="text-secondary">
                                     {{$meta->event_date}}
                                 </div>
                             </div>
                             <div class="col-2 text-center">
-                                <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                                <a href="#" class="btn btn-sm btn-success">Concluida</a>
+                                <a href="{{ route('meta.edit', $meta->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="{{ route('meta.destroy_confirm', $meta->id) }}" class="btn btn-sm btn-danger">Excluir</a>
                             </div>
                         </div>
                     <?php endforeach; ?>
