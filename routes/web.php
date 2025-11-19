@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\IdeiaController;
 use App\Http\Controllers\MetaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,16 @@ Route::controller(MetaController::class)->group(function(){
     Route::put('/meta/update/{id}', 'update')->name('meta.update');
     Route::get('/meta/destroy/{id}', 'destroy_confirm')->name('meta.destroy_confirm');
     Route::delete('/meta/destroy/{id}', 'destroy')->name('meta.destroy');
+});
+
+Route::controller(IdeiaController::class)->group(function(){
+    Route::get('/plano', 'index')->name('ideia.index');
+    Route::get('/plano/create', 'create')->name('ideia.create');
+    Route::post('/plano', 'store')->name('ideia.store');
+    // Route::get('/plano/show/{id}', 'show')->name('show.ideia');
+    Route::get('/plano/edit/{id}', 'edit')->name('ideia.edit');
+    Route::put('/plano/edit/{id}', 'update')->name('ideia.update');
+    Route::get('/plano/destroy_confirm/{id}', 'destroy_confirm')->name('ideia.destroy_confirm');
+    Route::delete('/plano/destroy/{id}', 'destroy')->name('ideia.destroy');
+
 });

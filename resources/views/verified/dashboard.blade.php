@@ -208,9 +208,49 @@ $ideias = Ideia::where('user_id', $user_id)->get();
             </div>
 
             <div id="content-configuracoes" class="content-section hidden">
-                <h1 class="text-3xl font-bold text-gray-800 mb-6 ">Meus Planos</h1>
-                <div class="flex bg-white rounded-lg shadow-md" style="height: 70vh;">
+                <div class="row">
+                    <div class="col-4">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-6">Meus Planos</h1>
+                    </div>
+                    <div class="col-4">
+                        {{-- abc --}}
+                    </div>
+                    <div class="col-4 justify-content-end">
+                        <button class="btn btn-primary"><a href="{{ route('ideia.create') }}" class="text-decoration-none">Nova Ideia</a></button>
+                    </div>
+                </div>
+                <div class="container-fluid bg-white rounded-lg shadow-md" style="height: 70vh;">
+                    <div class="row py-2">
+                        <div class="col-1">
+                            <h4><strong>ID</strong></h4>
+                        </div>
+                        <div class="col-3">
+                            <h4><strong>Título</strong></h4>
+                        </div>
 
+                        <div class="col-4 text-left">
+                            <h4><strong>Descrição da ideia</strong></h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <?php foreach ($ideias as $ideia): ?>
+                        <div class="row border-bottom py-2">
+                            <div class="col-1">
+                                {{ $ideia->id }}
+                            </div>
+                            <div class="col-3">
+                                {{ $ideia->titulo }}
+                            </div>
+                            <div class="col-4">
+                                {{ $ideia->description }}
+                            </div>
+
+                            <div class="col-4 text-center">
+                                <a href="{{ route('ideia.edit', $ideia->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="{{ route('ideia.destroy_confirm', $ideia->id) }}" class="btn btn-sm btn-danger">Excluir</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
 

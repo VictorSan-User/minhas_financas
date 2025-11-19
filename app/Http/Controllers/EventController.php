@@ -80,8 +80,9 @@ class EventController extends Controller
         }
     }
 
-    public function destroy_confirm(string $id):View {
-        return view('verified.destroy_confirm', ['id' => $id]);
+    public function destroy_confirm(string $id) :View {
+        $evento = Event::findOrFail($id);
+        return view('verified.destroy_confirm', ['evento' => $evento]);
     }
 
     public function destroy(string $id) {

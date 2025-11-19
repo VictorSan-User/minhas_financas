@@ -1,18 +1,18 @@
 @extends('layouts.layout')
 @section('content')
 
-    <form action="{{ route('events.destroy', $evento->id) }}" method="POST">
+    <form action="{{ route('ideia.destroy', $ideia->id) }}" method="POST">
         @csrf
         @method('DELETE')
         <div class="container my-5">
             <div class="card border-danger shadow-lg" style="max-width: 25rem; margin: auto;">
                 <div class="card-header bg-danger">
                     <h5 class="mb-0 text-light text-center">
-                        Aviso de Confirmação
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i> Aviso de Confirmação
                     </h5>
                 </div>
                 <div class="card-body text-center">
-                    <h4 class="card-title">Tem certeza que deseja excluir o registro  <strong class="text-danger"> {{ $evento->title }}</strong>?</h4>
+                    <h4 class="card-title">Tem certeza que deseja excluir <strong class="text-danger"> {{ $ideia->title }} </strong> ?</h4>
                     <p class="card-text">
                         Esta ação pode ser <strong>irreversível</strong>. Por favor, confirme sua decisão.
                     </p>
